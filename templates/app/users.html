@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+
+    {% if registered %}
+    <h1>Successfully registered</h1>
+    {% else %}
+    
+    <h1>sign up</h1>
+    
+    <form enctype="multipart/form-data" method="POST">
+    <p><label for="id_employee_id">Employee id:</label> <input type="number" name="employee_id" required id="id_employee_id"></p>
+<p><label for="id_employee_name">Employee name:</label> <input type="text" name="employee_name" maxlength="30" required id="id_employee_name"></p>
+    <p><label for="id_username">Username:</label> <input type="text" name="username" maxlength="150" required id="id_username"> <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+<p><label for="id_email">Email address:</label> <input type="email" name="email" maxlength="254" id="id_email"></p>
+<p><label for="id_password">Password:</label> <input type="password" pattern="[a-zA-Z0-9]{5}" title="4 charcter and one digit" name="password"  required id="id_password"></p>
+   
+    <input type="hidden" name="csrfmiddlewaretoken" value="uxEEJoSlm5aHrT8szjRrHnf34j8rXQTV4Kvwbpay9gI2HEFj2hfclHxaAyqrc4e3">
+    
+    <button type="submit" value="Register">Save</button></h2></center></form>{% endif%}
+    </html>
+   
