@@ -1,0 +1,46 @@
+{% extends 'app/home.html' %}
+{% block body %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <style>
+        h1{
+            margin-left: 12%;
+        }
+        table{
+            margin-left: 12%; 
+        }
+        </style>
+</head>
+<body >
+<h1>Tickects</h1>
+{% if employeeform %}
+<table border="1"><thead>
+    
+    <th>name</th>
+    <th>subject</th>
+    <th>type&nbsp</th>
+    <th>status&nbsp</th>
+    <th>priority</th>
+    
+    </thead>
+    
+    {% for cus in employeeform %}
+    <tr>
+        
+        <td>{{cus.name}}&nbsp</td>
+        <td>{{cus.subject}}&nbsp</td>
+        <td>{{cus.type}}&nbsp</td>
+        <td>{{cus.status}}&nbsp</td>
+        <td>{{cus.priority}}</td>
+        
+    </tr>
+    {%endfor%}
+</table>
+{% else %}
+<p>no data</p>
+{% endif %}
+</body>
+    </html>
+    {% endblock %}

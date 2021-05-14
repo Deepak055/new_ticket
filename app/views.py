@@ -1,22 +1,29 @@
 from django.shortcuts import render
 from django.urls import reverse
 from app.forms import UserForm,EndUserform
-from app.forms import employeeform,Supervisorform
+from app.forms import employeeform,Supervisorform,Customercreationform
 from django.template import RequestContext
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.decorators import login_required
+from .models import Customercreation
 # Create your views here.
 
 def home(request):
     return render(request,'app/home.html')
 
 def customer(request):
+    
     return render(request,'app/customer.html')
 
 
 def super_visor(request):
     return render(request,'app/supervisor.html')
+
+
+def employee(request):
+    employeeform=Customercreation.objects.all()
+    return render(request,'app/employee.html',{'employeeform':employeeform})    
 
 
 
@@ -220,3 +227,35 @@ def supervisor(request):
         user_form=UserForm()
         supervisor_form=Supervisorform()
     return render(request,'app/users2.html',{'user_form':user_form,'supervisor_form':supervisor_form,'registered':registered})
+
+
+def customercreate(request):
+    
+    
+    registered=False
+
+    if request.method=='POST':
+        user_form=UserForm(data=request.POST)
+        customercreation_form=Customercreationform(data=request.POST)
+        
+
+        if user_form.is_valid() and customercreation_form.is_valid():
+            
+            user=user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            customer_form=customercreation_form.save(commit=False)
+            customer_form.user=user
+            customer_form.save()
+            
+
+            registered=True
+            
+            
+        else:
+            print(user_form.errors,customercreation_form.errors)
+    else:
+        user_form=UserForm()
+        customercreation_form=Customercreationform()
+    return render(request,'app/customer.html',{'user_form':user_form,'customercreation_form':customercreation_form,'registered':registered})

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from . models import Employee,EndUser,Supervisor
+from . models import Employee,EndUser,Supervisor,Customercreation
 
 
 class UserForm(forms.ModelForm):
@@ -29,3 +29,10 @@ class Supervisorform(forms.ModelForm):
     class Meta:
         model=Supervisor
         fields=('supervisor_id','supervisor_name')   
+
+
+class Customercreationform(forms.ModelForm):
+
+    class Meta:
+        model=Customercreation
+        fields=('name','subject','type','status','priority','description')
